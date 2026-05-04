@@ -1,0 +1,114 @@
+.profile-page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.profile-section-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 24px 16px;
+  }
+
+  .profile-container {
+    max-width: 100%;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-page {
+    padding: 16px 12px 24px;
+  }
+
+  .profile-title {
+    font-size: 21px;
+  }
+
+  .profile-section {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .profile-section-header {
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-form > div[style*="justify-content: flex-end"],
+  .profile-section > div[style*="justify-content: space-between"] {
+    justify-content: stretch !important;
+  }
+
+  .profile-form > div[style*="justify-content: flex-end"] .btn,
+  .profile-section > div[style*="justify-content: space-between"] .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-form > div[style*="gap: 8"] {
+    flex-wrap: wrap;
+  }
+
+  .profile-form > div[style*="gap: 8"] .btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 130px;
+  }
+
+  .profile-form img[alt="QR Code 2FA"] {
+    width: min(180px, 70vw) !important;
+    height: min(180px, 70vw) !important;
+  }
+}
