@@ -284,7 +284,12 @@
   .vault-search-group {
     width: 100%;
     min-width: 0;
+    flex: 1;
   }
+
+  .sort-pill { min-width: 38px; }
+  .vault-toolbar { flex-wrap: wrap; gap: 8px; }
+  .vault-main { padding: 10px; gap: 10px; }
 
   .toolbar-meta {
     order: 2;
