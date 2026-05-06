@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { FiCopy, FiEye, FiEyeOff, FiEdit2, FiTrash2, FiStar, FiGlobe, FiUser, FiAlertTriangle, FiShield } from "react-icons/fi";
+import { FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { checkHibp } from "../utils/hibp.js";
 import "../css/EntryCard.css";
@@ -84,7 +85,7 @@ export default function EntryCard({ entry, onEdit, onDelete, onToggleFavorite })
             title="Favori"
             aria-label={entry.is_favorite ? `Retirer ${entry.title} des favoris` : `Ajouter ${entry.title} aux favoris`}
           >
-            <FiStar size={16} />
+            {entry.is_favorite ? <FaStar size={16} /> : <FiStar size={16} />}
           </button>
         </div>
       </div>
