@@ -1,7 +1,7 @@
 import { generateSecret, generateURI, verify } from "otplib";
 import QRCode from "qrcode";
 import { findUserByEmail, findUserById, findUserSecurityById, saveTotpSecret, enableTotp, disableTotp } from "../models/User.js";
-import { clearTwoFaCookie, readCookie, setAuthCookie, TWO_FA_COOKIE, verifyToken } from "../utils/authTokens.js";
+import { clearTwoFaCookie, readCookie, setAuthCookie, signAuthToken, TWO_FA_COOKIE, verifyToken } from "../utils/authTokens.js";
 
 const verifyTotp = async (token, secret) => {
   const result = await verify({ token, secret });
@@ -88,6 +88,6 @@ export const verifyLogin2fa = async (req, res) => {
 
     clearTwoFaCookie(res);
     setAuthCookie(res, { id: user.id, email: user.email });
-    res.json({ user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email } });
+    res.json({ token: signAuthToken({ id: user.id, email: user.email }), user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email } });
   } catch (err) { res.status(500).json({ message: err.message }); }
 };

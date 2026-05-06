@@ -50,6 +50,7 @@ export function AuthProvider({ children }) {
       pbkdf2_salt,
     });
 
+    if (data.token) localStorage.setItem("pm_token", data.token);
     localStorage.setItem("pm_user", JSON.stringify(data.user));
     setUser(data.user);
     setEncKeyRaw(rawKey);
@@ -70,6 +71,7 @@ export function AuthProvider({ children }) {
       return { requires2fa: true };
     }
 
+    if (data.token) localStorage.setItem("pm_token", data.token);
     localStorage.setItem("pm_user", JSON.stringify(data.user));
     setUser(data.user);
     setEncKeyRaw(rawKey);
@@ -78,6 +80,7 @@ export function AuthProvider({ children }) {
 
   const verify2fa = useCallback(async (code) => {
     const { data } = await api.post("/auth/2fa/verify-login", { code });
+    if (data.token) localStorage.setItem("pm_token", data.token);
     localStorage.setItem("pm_user", JSON.stringify(data.user));
     setUser(data.user);
     setEncKeyRaw(pendingKeyRef.current);
@@ -117,6 +120,7 @@ export function AuthProvider({ children }) {
     clearTimeout(timerRef.current);
     api.post("/auth/logout").catch(() => {});
     localStorage.removeItem("pm_user");
+    localStorage.removeItem("pm_token");
     setUser(null);
     setEncKeyRaw(null);
     setLocked(false);

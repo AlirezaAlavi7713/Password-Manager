@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { findUserByEmail, findUserById, createUser, getSalt, updateProfile, updateMasterPasswordWithEntries } from "../models/User.js";
 import { createCategory } from "../models/Category.js";
-import { clearAuthCookie, setAuthCookie, setTwoFaCookie } from "../utils/authTokens.js";
+import { clearAuthCookie, setAuthCookie, setTwoFaCookie, signAuthToken } from "../utils/authTokens.js";
 
 const DEFAULT_CATEGORIES = [
   { name: "Réseaux sociaux", icon: "🔗", color: "#6366f1" },
@@ -27,7 +27,7 @@ export const register = async (req, res) => {
     }
 
     setAuthCookie(res, { id: userId, email });
-    res.status(201).json({ user: { id: userId, nom, prenom, email } });
+    res.status(201).json({ token: signAuthToken({ id: userId, email }), user: { id: userId, nom, prenom, email } });
   } catch (err) { console.error("[register]", err.message); res.status(500).json({ error: err.message }); }
 };
 
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
     }
 
     setAuthCookie(res, { id: user.id, email });
-    res.json({ user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email } });
+    res.json({ token: signAuthToken({ id: user.id, email }), user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email } });
   } catch { res.status(500).json({ message: "Erreur serveur" }); }
 };
 
