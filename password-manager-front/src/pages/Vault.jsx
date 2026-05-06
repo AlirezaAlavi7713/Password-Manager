@@ -34,8 +34,10 @@ export default function Vault() {
 
   // ── Fetch categories ──
   const fetchCategories = useCallback(async () => {
-    const { data } = await api.get("/categories");
-    setCategories(data);
+    try {
+      const { data } = await api.get("/categories");
+      setCategories(data);
+    } catch { /* silencieux */ }
   }, []);
 
   // ── Fetch & decrypt entries ──
@@ -68,8 +70,10 @@ export default function Vault() {
 
   // ── Fetch stats ──
   const fetchStats = useCallback(async () => {
-    const { data } = await api.get("/vault/stats");
-    setStats(data);
+    try {
+      const { data } = await api.get("/vault/stats");
+      setStats(data);
+    } catch { /* silencieux */ }
   }, []);
 
   useEffect(() => {
