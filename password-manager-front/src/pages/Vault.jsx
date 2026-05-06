@@ -62,7 +62,9 @@ export default function Vault() {
       );
       setEntries(decrypted);
     } catch (err) {
-      toast.error(getApiErrorMessage(err, "Impossible de charger le coffre."));
+      if (err.response?.status !== 401) {
+        toast.error(getApiErrorMessage(err, "Impossible de charger le coffre."));
+      }
     } finally {
       setLoading(false);
     }
