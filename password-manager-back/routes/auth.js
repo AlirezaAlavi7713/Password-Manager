@@ -37,7 +37,7 @@ const loginRules = [
   body("auth_key_hash").notEmpty().withMessage("Clé d'authentification requise"),
 ];
 
-router.post("/register", registerRules, validate, register);
+router.post("/register", loginLimiter, registerRules, validate, register);
 router.post("/salt", saltLimiter, saltRules, validate, getSaltForEmail);
 router.post("/login", loginLimiter, loginRules, validate, login);
 router.post("/logout", logout);

@@ -17,3 +17,17 @@ dist
 .idea
 .vscode/*
 !.vscode/extensions.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# SSL / certificates
+*.pem
+*.key
+*.cert
+*.crt
+
+# Local overrides
+*.local
